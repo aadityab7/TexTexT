@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}TexTexT{% endblock %}
+
+{% block content %}
+	<div class="h-full bg-[#141414]">
+		<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8 items-center text-center h-full">
+			<h1 class="text-2xl font-bold mb-10">
+				Extract key data from
+				<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
+			    	Documents
+			  	</span>
+			</h1>
+			<p class="mb-10">
+				<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
+			    	AI-driven text extraction
+			  	</span>
+				 ✨
+				<br>
+				Say goodbye to manual data entry and 
+				<br>
+				👋 hello to efficiency and accuracy.
+			</p>
+			<button class="px-4 py-2 bg-[#9B60FF] rounded-lg mb-10">
+            	<p>
+             		Upload Files
+            	</p>
+          	</button>
+			<img class = "mx-auto h-40" src="{{url_for('static', filename='/images/hero-1.png')}}">
+		</div>
+	</div>
+	<div class="h-full bg-[#292929]">
+		<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8 text-center h-full">
+			<h1 class="text-2xl font-bold mb-10">
+				Example - 
+				<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
+			    	Extract Custom Data Fields
+			  	</span>
+			</h1>
+			<img class = "mx-auto h-60 mb-10" src="{{url_for('static', filename='/images/hero-2.png')}}">
+			<button class="px-4 py-2 bg-[#9B60FF] rounded-lg self-center">
+            	<p>
+             		Try Now
+            	</p>
+          	</button>
+		</div>
+	</div>
+	<div class="h-full bg-[#141414]">
+		<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8 text-center h-full">
+			<h1 class="text-2xl font-bold mb-10">
+				How it Works
+			</h1>
+			<img class = "mx-auto h-60 mb-10" src="{{url_for('static', filename='/images/hero-3.png')}}">
+			<button class="px-4 py-2 bg-[#9B60FF] rounded-lg self-center">
+            	<p>
+             		Compare AI Models
+            	</p>
+          	</button>
+		</div>
+	</div>
+	<div class="h-full bg-[#292929]">
+		<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8 text-center h-full">
+			<h1 class="text-2xl font-bold mb-10">
+				API
+			</h1>
+			<div class="grid grid-cols-4 gap-8">
+				<div class="col-span-2 items-right justify-right align-right self-right">
+					<img class = "h-60 mb-10" src="{{url_for('static', filename='/images/hero-4.png')}}">
+				</div>
+				<div class="text-left col-span-2">
+					<h1 class="text-2xl font-bold mb-10">
+						Integrates with your 
+						<br>
+						Software Workflow
+					</h1>
+					<p class="mb-10">
+						To bring more digital efficiency to your workflow,
+						<br>
+						use our API!
+					</p>
+					<button class="px-4 py-2 bg-[#9B60FF] rounded-lg self-center">
+		            	<p>
+		             		API Documentation
+		            	</p>
+		          	</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

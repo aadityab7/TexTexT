@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Text Extraction Progress Page{% endblock %}
+
+{% block content %}
+
+<div>
+	<h1>Text Extraction Progress for batch: {{batch_id}}</h1>
+	<div id="connetion_status"></div>
+    <div id="previous_progress">Progress</div>
+	<div id="current_model_and_image_progress"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+<script type="text/javascript" charset="utf-8">
+	var batch_id = {{batch_id}};
+    var processing_completed = false;
+
+    var socket_str = 'http://' + document.domain + ':' + location.port + '/image_processed?batch_id=' + batch_id;
+
+    // console.log('socket_str');
+    // console.log(socket_str);
+    
+    var socket = io.connect(socket_str);
+
+    socket.on('connect', function() {
+        // console.log('Connected to server.');
+        document.getElementById('connetion_status').innerText = 'Connection made sucessfully!';
+    });
+
+    socket.on('image_processed', function(msg) {
+        // console.log('completed another one!')   
+        console.log(msg.progress_update_text);
+        document.getElementById('current_model_and_image_progress').innerText = msg.progress_update_text;
+    });
+
+    socket.on('image_processing_finished', function() {
+        // console.log('image processing finished. Disconnecting...');
+        socket.disconnect(); // Disconnect the socket
+        processing_completed = true;
+        document.getElementById('connetion_status').innerText = 'Image Processing Completed! Closing the connection.';
+        //we can also make a call to redirect to the results page.
+    });
+
+    socket.on('model_process_complete', function() {
+        // another model completed processing all the images
+        document.getElementById('previous_progress').innerText = document.getElementById('previous_progress').innerText + '\n' +  document.getElementById('current_model_and_image_progress').innerText;
+    });
+
+    socket.on('disconnect', function() {
+        // console.log('Disconnected from server.');
+        //this only shows any changes when socket connection is suddenly closed - not on successful completion.
+        if (processing_completed === false){
+            document.getElementById('connetion_status').innerText = 'Connection lost. Please refresh the page.';
+        }
+    });
+    
+</script>
+
+{% endblock %}
