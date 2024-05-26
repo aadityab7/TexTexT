@@ -1,4 +1,4 @@
-# my_flask_app/app/routes.py
+# Textext/project/routes.py
 
 import os
 import json
@@ -11,7 +11,7 @@ from flask import Blueprint, render_template, current_app, request, jsonify, ses
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, emit
 
-from app.utils.backend_operations import *
+from project.utils.backend_operations import *
 
 main = Blueprint('main', __name__)
 

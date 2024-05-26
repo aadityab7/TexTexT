@@ -1,5 +1,5 @@
 import os
-from app import create_app
+from project import create_app
 
 # Determine the configuration based on the environment variable
 config_name = os.getenv('FLASK_CONFIG') or 'development'
