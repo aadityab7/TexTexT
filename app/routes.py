@@ -20,33 +20,14 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-@main.route('/upload_images', methods=['POST'])
+@main.route('/upload_images', methods=['GET', 'POST'])
 def upload_images():
-    if 'images' not in request.files:
-        return jsonify({'error': 'No images uploaded!!'})
-
-    images = request.files.getlist('images')
-
-    if not images:
-        return jsonify({'error': 'No Images Uploaded!!'})
-
-    batch_id = create_batch(len(images))
-    uploaded_paths = []
-
-    for image in images:
-        # Generate a secure filename and save the image locally
-        #later this will be updated to store the files in the cloud
-        filename = secure_filename(image.filename)
-        upload_folder = 'image_uploads'  
-        os.makedirs(upload_folder, exist_ok=True)
-        local_path = os.path.join(upload_folder, filename)
-        image.save(local_path)
-        uploaded_paths.append(local_path)
-
-        # Insert image details into the database
-        insert_image(batch_id, local_path)  
-
-    return jsonify({'batch_id': batch_id})
+    if request.method == 'GET':
+        load_dialog = request.args.get('load_dialog', 'false').lower() == 'true'
+        return render_template('upload.html', load_dialog=load_dialog)
+    else:
+        result = add_images(request)
+        return result
 
 @main.route('/select_models/<int:batch_id>', methods = ['GET', 'POST'])
 def select_models(batch_id):

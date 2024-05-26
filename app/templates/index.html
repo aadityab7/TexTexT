@@ -7,6 +7,7 @@
 		<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-10 items-center text-center self-center">
 			<h1 class="text-2xl font-bold mb-10">
 				Extract key data from
+				<br class="block md:hidden">
 				<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
 			    	Documents
 			  	</span>
@@ -21,11 +22,13 @@
 				<br>
 				👋 hello to efficiency and accuracy.
 			</p>
-			<button class="px-4 py-2 bg-[#9B60FF] rounded-lg mb-10">
-	        	<p>
-	         		Upload Files
-	        	</p>
-	      	</button>
+			<a href="{{url_for('main.upload_images', load_dialog=True)}}" > 
+	            <button type="submit" class="px-4 py-2 bg-[#9B60FF] rounded-lg mb-10">
+	            	<p>
+	            		Upload Files
+	            	</p>
+	            </button>
+	        </a>
 			<img class = "mx-auto h-40" src="{{url_for('static', filename='/images/hero-1.png')}}">
 		</div>
 	</div>

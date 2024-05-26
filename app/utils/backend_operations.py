@@ -276,3 +276,30 @@ def store_models_for_batch(models_list: list, batch_id: int):
     args = (model_id_list, batch_id)
     
     execute_query(query = query, query_type = 'commit', args = args)
+
+def add_images(request):
+    if 'images' not in request.files:
+        return jsonify({'error': 'No images uploaded!!'})
+
+    images = request.files.getlist('images')
+
+    if not images:
+        return jsonify({'error': 'No Images Uploaded!!'})
+
+    batch_id = create_batch(len(images))
+    uploaded_paths = []
+
+    for image in images:
+        # Generate a secure filename and save the image locally
+        #later this will be updated to store the files in the cloud
+        filename = secure_filename(image.filename)
+        upload_folder = 'image_uploads'  
+        os.makedirs(upload_folder, exist_ok=True)
+        local_path = os.path.join(upload_folder, filename)
+        image.save(local_path)
+        uploaded_paths.append(local_path)
+
+        # Insert image details into the database
+        insert_image(batch_id, local_path)  
+
+    return jsonify({'batch_id': batch_id})
