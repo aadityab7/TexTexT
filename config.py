@@ -27,9 +27,9 @@ class DevelopmentConfig(Config):
     # Development specific configurations go here
 
     # Database Config
-    DB_NAME = os.environ.get('DEVELOPMENT_DB_NAME') or 'your_db_name'
-    DB_USER = os.environ.get('DEVELOPMENT_DB_USER') or 'your_db_user'
-    DB_PASSWORD = os.environ.get('DEVELOPMENT_DB_PASSWORD') or 'your_db_password'
+    DB_NAME = os.environ.get('DEVELOPMENT_DB_NAME') or 'textext'
+    DB_USER = os.environ.get('DEVELOPMENT_DB_USER') or 'postgres'
+    DB_PASSWORD = os.environ.get('DEVELOPMENT_DB_PASSWORD') or None
     DB_HOST = os.environ.get('DEVELOPMENT_DB_HOST') or 'localhost'
     DB_PORT = os.environ.get('DEVELOPMENT_DB_PORT') or '5432' 
 

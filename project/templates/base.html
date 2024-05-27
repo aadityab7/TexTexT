@@ -12,6 +12,8 @@
   -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Include DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
 <!--bg-[#141414]-->
 <body class="text-white bg-[#141414]">
@@ -19,27 +21,31 @@
 
     <div class="bg-[#292929] row-span-1"> 
       <div class="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8 justify-center align-center h-full">
-            <div class="flex items-center gap-4 align-center h-full">
-              <svg class='h-7 w-7' viewBox="0 0 51 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_75_92)">
-                <path d="M18.6128 20.1591C23.6273 20.1591 27.6923 16.094 27.6923 11.0795C27.6923 6.06505 23.6273 2 18.6128 2C13.5983 2 9.53326 6.06505 9.53326 11.0795C9.53326 16.094 13.5983 20.1591 18.6128 20.1591Z" stroke="#B390EE" stroke-width="4"/>
-                <path d="M0.585848 27.3007C-0.195201 28.0818 -0.195201 29.3481 0.585848 30.1291C1.3669 30.9102 2.63323 30.9102 3.41427 30.1291L0.585848 27.3007ZM11.508 16.3785L0.585848 27.3007L3.41427 30.1291L14.3365 19.2069L11.508 16.3785Z" fill="#B390EE"/>
-                <path d="M48.8287 4.56995H34.1967" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
-                <path d="M48.8287 13.5909H35.4424" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
-                <path d="M48.8287 22.7955H31.6924" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
-                <path d="M48.8287 32H18.056" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
-                </g>
-                <defs>
-                <clipPath id="clip0_75_92">
-                <rect width="51" height="34" fill="white"/>
-                </clipPath>
-                </defs>
-              </svg>
+          <a href="{{url_for('main.index')}}" class="h-full"> 
+            <button type="submit" class="h-full">
+              <div class="flex items-center gap-4 align-center h-full">
+                <svg class='h-7 w-7' viewBox="0 0 51 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_75_92)">
+                  <path d="M18.6128 20.1591C23.6273 20.1591 27.6923 16.094 27.6923 11.0795C27.6923 6.06505 23.6273 2 18.6128 2C13.5983 2 9.53326 6.06505 9.53326 11.0795C9.53326 16.094 13.5983 20.1591 18.6128 20.1591Z" stroke="#B390EE" stroke-width="4"/>
+                  <path d="M0.585848 27.3007C-0.195201 28.0818 -0.195201 29.3481 0.585848 30.1291C1.3669 30.9102 2.63323 30.9102 3.41427 30.1291L0.585848 27.3007ZM11.508 16.3785L0.585848 27.3007L3.41427 30.1291L14.3365 19.2069L11.508 16.3785Z" fill="#B390EE"/>
+                  <path d="M48.8287 4.56995H34.1967" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M48.8287 13.5909H35.4424" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M48.8287 22.7955H31.6924" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M48.8287 32H18.056" stroke="#B390EE" stroke-width="4" stroke-linecap="round"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_75_92">
+                  <rect width="51" height="34" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
 
-              <p class="text-lg">
-                TexTexT
-              </p>
-            </div>
+                <p class="text-lg">
+                  TexTexT
+                </p>
+              </div>
+            </button>
+          </a>
       </div>
     </div>
   

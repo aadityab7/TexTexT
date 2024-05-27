@@ -1,5 +1,9 @@
 # TexTexT/app/utils/backend_operations.py
 
+import os
+from flask import request, jsonify, session, redirect, url_for
+from werkzeug.utils import secure_filename
+
 from .database_operations import execute_query
 
 def create_batch(num_images: int = 0):
@@ -278,15 +282,16 @@ def store_models_for_batch(models_list: list, batch_id: int):
     execute_query(query = query, query_type = 'commit', args = args)
 
 def add_images(request):
-    if 'images' not in request.files:
+    print(request.files)
+    if 'files' not in request.files:
         return jsonify({'error': 'No images uploaded!!'})
 
-    images = request.files.getlist('images')
+    images = request.files.getlist('files')
 
     if not images:
         return jsonify({'error': 'No Images Uploaded!!'})
 
-    batch_id = create_batch(len(images))
+    #batch_id = create_batch(len(images))
     uploaded_paths = []
 
     for image in images:
@@ -300,6 +305,8 @@ def add_images(request):
         uploaded_paths.append(local_path)
 
         # Insert image details into the database
-        insert_image(batch_id, local_path)  
+        #insert_image(batch_id, local_path)  
 
-    return jsonify({'batch_id': batch_id})
+    print("Uploaded Paths: ", uploaded_paths)
+
+    return jsonify({'batch_id': uploaded_paths})

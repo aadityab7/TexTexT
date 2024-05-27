@@ -6,9 +6,9 @@ import random
 import time
 import threading
 from datetime import datetime
+import pandas as pd
 
 from flask import Blueprint, render_template, current_app, request, jsonify, session, redirect, url_for
-from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, emit
 
 from project.utils.backend_operations import *
@@ -23,8 +23,20 @@ def index():
 @main.route('/upload_images', methods=['GET', 'POST'])
 def upload_images():
     if request.method == 'GET':
-        load_dialog = request.args.get('load_dialog', 'false').lower() == 'true'
-        return render_template('upload.html', load_dialog=load_dialog)
+        # If GET, render the uploaded files
+        uploaded_files = os.listdir('image_uploads')
+
+        df = pd.DataFrame(uploaded_files, columns=['Files'])
+        df['Links'] = df.apply(lambda row: f'<a href={row["Files"]} class="text-blue-500 hover:text-blue-700"">View</a>', axis=1)
+
+        # Add an index column
+        df.index += 1  # Make ID start from 1 instead of 0
+        df.index.name = 'ID'
+        df.reset_index(inplace=True)
+
+        # Convert dataframe to HTML
+        table_html = df.to_html(classes='table table-striped', index=False, table_id='sortable-table',  escape=False)
+        return render_template('upload.html', table=table_html)
     else:
         result = add_images(request)
         return result

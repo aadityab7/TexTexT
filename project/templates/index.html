@@ -3,33 +3,59 @@
 {% block title %}TexTexT{% endblock %}
 
 {% block content %}
-	<div class="row-span-11 flex items-center justify-center">
-		<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-10 items-center text-center self-center">
-			<h1 class="text-2xl font-bold mb-10">
-				Extract key data from
-				<br class="block md:hidden">
-				<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
-			    	Documents
-			  	</span>
-			</h1>
-			<p class="mb-10">
-				<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
-			    	AI-driven text extraction
-			  	</span>
-				 ✨
-				<br>
-				Say goodbye to manual data entry and 
-				<br>
-				👋 hello to efficiency and accuracy.
-			</p>
-			<a href="{{url_for('main.upload_images', load_dialog=True)}}" > 
-	            <button type="submit" class="px-4 py-2 bg-[#9B60FF] rounded-lg mb-10">
-	            	<p>
-	            		Upload Files
-	            	</p>
-	            </button>
-	        </a>
-			<img class = "mx-auto h-40" src="{{url_for('static', filename='/images/hero-1.png')}}">
-		</div>
+<div class="row-span-11 flex items-center justify-center">
+	<div class="flex flex-col justify-between mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-10 items-center text-center self-center">
+		<h1 class="text-2xl font-bold mb-10">
+			Extract key data from
+			<br class="block md:hidden">
+			<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
+		    	Documents
+		  	</span>
+		</h1>
+		<p class="mb-10">
+			<span class="bg-clip-text text-transparent bg-gradient-to-r from-[#C79FFF] to-[#9B60FF]">
+		    	AI-driven text extraction
+		  	</span>
+			 ✨
+			<br>
+			Say goodbye to manual data entry and 
+			<br>
+			👋 hello to efficiency and accuracy.
+		</p>
+		
+        <button id="upload-button" class="px-4 py-2 bg-[#9B60FF] rounded-lg mb-10">
+            <p>Upload Files</p>
+        </button>
+        <input type="file" id="file-input" multiple style="display: none;">
+		<img class = "mx-auto h-40" src="{{url_for('static', filename='/images/hero-1.png')}}">
 	</div>
+</div>
+
+<script>
+document.getElementById('upload-button').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+});
+
+document.getElementById('file-input').addEventListener('change', function() {
+    var files = this.files;
+    if (files.length > 0) {
+        var formData = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+        fetch('{{url_for("main.upload_images")}}', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '{{url_for("main.upload_images")}}';
+            } else {
+                alert('File upload failed.');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+});
+</script>
 {% endblock %}
